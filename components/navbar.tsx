@@ -25,6 +25,7 @@ import {
 	DiscordIcon,
 	HeartFilledIcon,
 	SearchIcon,
+	RingIcon
 } from "@/components/icons";
 
 import { Logo } from "@/components/icons";
@@ -56,8 +57,8 @@ export const Navbar = () => {
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
-						<Logo />
-						<p className="font-bold text-inherit">ACME</p>
+						{/*<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEyklEQVR4nO1YzW8bRRQfEDvjNKFpIXGCU6d2nFAQHCouECT4HyiIqg3ckPoXULihSpQDXCK+ioSoUWLROmniJE0iheDujGtEkThCG0AgVaWEpEUkdWLXdp2H3qw3eNfr7NgmEkj7pLnszu/N+828rxlCPPHEE0888cST/4mA0J4CwU6BoDoIdg0E2wDOsiDoDfmNs3eA+wYdsdw3KP9LLL1h4NiGoUfqO4X6/32jgdwHKfoScLYEgoHiuAZJ7Tjo5AHg2vEyWTUsx3Xoi7hu88YLFgZBv6nDcMu49+WeH0rJluWG8Jx+DToLNWG873kQ9FajxpujMLcvU5zf93ODJFbRjsaM5yzvcLz4LQ66dgzS9BAskFa4QvbCZe0JSPleAc4uAmcFOy6X8BeKc+1L8j/Ow/mIWyCtUg/qQ70116yDRNltnHZ+Ai6zvp2wf37adfT6e8HSWqzzZiV2S/dBZvTgveykf3DHtZMsAoJNOp8EC6sFrN3nOSuBoK+7YscI/X04mP/ldBBwLH8cWLe40sWHYSPWuwbfEc1VF6cnjXVtMeEW2DLbVO28u/Eo2QvdH66f7YeVD/rg1zKJ9Zj/W8spRCNw90L3+yr6AElUn8SRnXe/OlVOKC0G5P5MLJy7c3YAcNw+0wcrZ3pu4XcQbMbUl40fgMxIKIff1UiwhM2eq25Fyho8Lj5vSm6i+4RpPI7NeGAL0iwi9eqsHwQros58wi//5yYeeU2JgM76q5KCrh2uQQAroYVtnCjK5liPMI3PfB6B0mLbtE33mIyD2YfknGw8oKvqBs7GbW70Vg0CspxXMj2muggGp0kgP90JWH0tujF1CgbFuf1yzkas9y9lAkIbshFI1mL6o2Viij6qukhmJFyUBKIDsJXcA5gOrbrpgHShmQ7jlEbCBWUCaXrI5tpLNZiyjPUESJsygWjE8P1zvQZ2gbRadGPBEgzuJroMAtEIKBPQSZvNtTPOEzm70ywBNNCRQJo8iN83v+g1Aj0a2VImcIXstZ3A+m64UEH6/0yHgXVwIXQtdDF5AqO74kL0knWiNRBVgrg4v7+M14YsunXfq/mpzu00W1cQp4wE4B7EzaTRuJFGMU2Wd+l85f/SYusMpleTQHYscGkX0qhWXchsruBWyPJTfhNfNLHoipvne7YqC51yIeN0QL2QObcSk8qtxGgoh61CBXYav698cuA2thbbhW40lFVpJUA2lmxauZWQILzKVTdQJ1WbOcxGwH3bWGzmsKnD5g6bPGz2cuPdw0qbIuibDra84M4a21Z7O61AAttpDGZsmyvxf3wUWDNb7JvDwTzekxVseMOhnU4TxQYqVL5A2G9GCWyudsJmxzufxYtL5SnIkzjX8dv1d4Ol1c+6Xlbw+SmHnV+FpO+gEgGXK2XByAraEOj0MVklF0k76NqTmCqBs1m8OuIVsgZ2Vs7D+RJH2oDTx8vX0XGn66i0g/ueUzbeSsLhJBRGcb79J7zMN4IF+843Yvw/JFi4KiYUR+mrlmV8VmnC+HRdbuMSVEcwhakvzr4HoR2VD1v44sBZPUSuumabhsno2mGshFjOy69tmYqnRWxF3oZUy9PO2JZnQLDTxrztp8WM1IP6UG+tIuWJJ5544oknnpD/pvwNmXgms31IIN8AAAAASUVORK5CYII="/>*/}
+						
 					</NextLink>
 				</NavbarBrand>
 				<ul className="hidden lg:flex gap-4 justify-start ml-2">

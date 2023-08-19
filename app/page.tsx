@@ -14,7 +14,7 @@ import { Navbar } from "@/components/navbar";
 import confetti from 'canvas-confetti';
 import {Card, CardFooter, CardBody, Divider,
 Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,
-useDisclosure} from "@nextui-org/react";
+useDisclosure, Input} from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChurch,
@@ -22,6 +22,7 @@ import {
   faChessRook,
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import {SignIn} from "@/components/signin";
 
 
 export default function Home() {
@@ -29,9 +30,28 @@ export default function Home() {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const [modalTitle, setModalTitle] = React.useState<string>('');
 	const [modalContent, setModalContent] = React.useState<React.ReactNode>(<></>);
+	const [isOpenForm, setOpenForm] = React.useState<boolean>(false);
+	
+	const [phoneNumber, setPhoneNumber] = React.useState<string>('');
+	const [verificationCode, setVerificationCode] = React.useState<string>('');
+	const [fullName, setFullName] = React.useState<string>('');
+	const [peopleNumber, setPeopleNumber] = React.useState<number>(1);
 
 	const handleConfetti = () => {
 	   confetti({particleCount: 200, spread: 70});
+	};
+
+	const handleRsvp = () => {
+	   handleConfetti();
+	   setOpenForm(true);
+	};
+
+	const onCloseForm = () => {
+		setOpenForm(false);
+	};
+
+	const onOpenFormChange = (e: boolean) => {
+		setOpenForm(e);
 	};
 
 	const modalTitleSwitcher = (kkey: string): string => {
@@ -211,7 +231,7 @@ export default function Home() {
 						</div>
 					</div>
 			        <Button className="align-center justify-center text-[1.8rem] font-['Rochester'] text-[#f9e285] border-[#f9e285] py-6" 
-						variant="bordered" onPress={handleConfetti}>
+						variant="bordered" onPress={handleRsvp}>
 			            RSVP
 			        </Button>  
 			    </CardFooter>
@@ -238,6 +258,7 @@ export default function Home() {
 		        isOpen={isOpen} 
 		        placement="auto"
 		        onOpenChange={onOpenChange} 
+		        backdrop="blur"
 		      >
 		        <ModalContent>
 		          {(onClose) => (
@@ -251,6 +272,22 @@ export default function Home() {
 		          )}
 		        </ModalContent>
 		      </Modal>
+
+		    <Modal 
+		        isOpen={isOpenForm} 
+		        onOpenChange={onOpenFormChange} 
+		        placement="auto"
+		        backdrop="blur"
+		      >
+		        <ModalContent>
+		          {(onClose) => (
+		            <>
+		              <ModalHeader className="flex flex-col gap-1">Siamo felici di averti con noi!!!</ModalHeader>
+		              <SignIn onCloseForm={onCloseForm}/>
+		            </>
+		          )}
+		        </ModalContent>
+	      </Modal>
 		</section>
 		<Navbar />
 		<section id="story" className="h-screen flex flex-col items-center justify-center gap-4 py-8 md:py-10 w-full h-full" data-scroll-section>
