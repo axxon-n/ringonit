@@ -27,7 +27,7 @@ export const SignIn = (props: Props): React.ReactNode => {
 	const [valueVerificationCode, setValueVerificationCode] = React.useState<string>('');
 	const [valueFullName, setValueFullName] = React.useState<string>('');
 	const [valueInvitees, setValueInvitees] = React.useState<string>('2');
-	const [valuePresence, setValuePresence] = React.useState(["comune", "chiesa", "rinfresco", "nave"]);
+	const [valuePresence, setValuePresence] = React.useState([]);
 	const [valueIsLoading, setValueIsLoading] = React.useState<boolean>(true);
 	const [valueLoader, setValueLoader] = React.useState<number>(30);
 
@@ -64,6 +64,7 @@ export const SignIn = (props: Props): React.ReactNode => {
 			//api call
 			setStepVerify(false);
 			setStepCompleteProfile(true);
+			setTimeout(() => fullNameInputRef.current.focus(), 0);
 		};
 	};
 
@@ -98,7 +99,7 @@ export const SignIn = (props: Props): React.ReactNode => {
 	};
 
 	const isInviteesValid = React.useMemo((): string => {
-		const pattern = /^[1-9]$/;
+		const pattern = /^[1-4]$/;
 		if (valueInvitees == "") return "invalid";
 		const isValidChar = pattern.test(valueInvitees);
 		return isValidChar ? "valid" : "invalid";
