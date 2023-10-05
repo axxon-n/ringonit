@@ -1,0 +1,18 @@
+{
+	"username": "rangelo1",
+	"per_page_results": 400,
+	"message": [
+			 {
+					 "language": "en",
+					 "body": "YawClub is here!",
+					 "title": "YawClub is here!",
+					 "navigation": ""
+			 },
+			 {
+					 "language": "it",
+					 "body": "YawClub è quì!",
+					 "title": "YawClub è quì!",
+					 "navigation": ""
+			 }
+	 ]
+}
