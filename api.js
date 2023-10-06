@@ -92,7 +92,7 @@ export const get_heartz_info = async () => {
 		"GET", 
 		null, 
 		{"Content-Type": "application/json"}, 
-		true
+		false
 	);
 	console.log("endpoint GET /hearts respone:", response);
 	return response;

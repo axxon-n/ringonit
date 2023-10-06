@@ -3,7 +3,7 @@ import { HeartFilledIcon } from "./icons"
 import {Button} from "@nextui-org/react";
 import { gsap, Power3, TweenMax } from 'gsap';
 
-export const Heart = ({ section }) => {
+export const Heart = ({ newHeart }) => {
 
   const ref = useRef(null);
 
@@ -24,7 +24,7 @@ export const Heart = ({ section }) => {
       }
     );
     animation.restart();
-    //api call
+    newHeart();
   };
 
   return (

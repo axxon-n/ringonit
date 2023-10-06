@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import App from "./App";
+import './i18n'
 // import clsx from "clsx";
 import "./styles.css";
 // import { Fira_Code as FontMono, Inter as FontSans } from "next/font/google"

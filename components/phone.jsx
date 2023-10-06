@@ -1,15 +1,18 @@
 import React, { Dispatch, SetStateAction } from "react";
 import './phone.css'
 import PhoneInput from 'react-phone-number-input'
+import { useTranslation } from "react-i18next";
 
 export const Phone = React.forwardRef((props, ref) => {
+
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
 
 	return (
 		<PhoneInput
 				ref={ref}
 			disabled={props.isDisabled}
-	      placeholder="Inserisci il tuo numero di telefono"
-	      defaultCountry="IT"
+	      placeholder={t('numeroDiTelefono')}
+	      defaultCountry={language.toUpperCase().replace("EN-", "")}
 	      value={props.valuePhone}
 	      onChange={props.setValuePhone}
 	      style={{

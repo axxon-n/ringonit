@@ -7,10 +7,16 @@ import {
   faClock,
   faLocationDot
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+import { Trans } from 'react-i18next';
 
 export const LaNostraGiornataCard = ({ iconSection, time, location, title, description, maps }) => {
 
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
+
 	const ref = React.useRef(null);
+
+	//loading="lazy"
 
 	gsap.registerPlugin( 
 	    ScrollTrigger
@@ -19,12 +25,12 @@ export const LaNostraGiornataCard = ({ iconSection, time, location, title, descr
 	React.useEffect(() => {
 		gsap.to(ref.current, { 
 		  opacity: 1,
-		  duration: 0.5,
-		  translateY: -100,
+		  duration: 0.2,
+		  translateY: -10,
 		  ease: Power3.easeOutQuad,
 		  scrollTrigger: {
 		  	trigger: ref.current,
-		    start: "45% bottom",
+		    start: "30% bottom",
 		    toggleActions: "play none none reverse"
 		  }
 		});
@@ -34,7 +40,7 @@ export const LaNostraGiornataCard = ({ iconSection, time, location, title, descr
 
 		<Card 
 			ref={ref} 
-			className="w-[80%] opacity-0 col-span-10 sm:col-span-4 overflow-visible sm:overflow-hidden h-full items-center mt-[3em] sm:mt-[4em]"
+			className="w-[80%] opacity-0 col-span-10 sm:col-span-4 overflow-visible sm:overflow-hidden h-full items-center"
 			style={{
 				'borderRadius': '10px',
 				background: '#0e0e0e',
@@ -50,7 +56,7 @@ export const LaNostraGiornataCard = ({ iconSection, time, location, title, descr
 					    style={{ color: "#f9e285", height: '2em' }}
 					/>
 			        <h4 className="font-['Rochester'] text-[1.8em] text-center font-semibold leading-none text-[#f9e285]">
-		              {title}
+		              {t(title)}
 		            </h4>
 			    </div>
 	    
@@ -62,21 +68,19 @@ export const LaNostraGiornataCard = ({ iconSection, time, location, title, descr
 						    icon={faClock}
 						    style={{ color: "#f9e28590", height: '1em' }}
 						/>
-			    		{time}
+			    		{t(time)}
 			    	</div>
 			    	<div className="col-start-2 font-['Rochester'] text-xl sm:text-2xl flex items-center gap-2 justify-center">
 			    		<FontAwesomeIcon
 						    icon={faLocationDot}
 						    style={{ color: "#f9e28590", height: '1em' }}
 						/>
-			    		{location}
+			    		{t(location)}
 			    	</div>
 			    </div>
 			</CardBody>
 			<CardBody className="px-3 py-5 text-lg sm:text-xl justify-center text-center text-[#f9e28590]">
-			    <p>
-			      {description}
-			    </p>
+			      <Trans i18nKey={description} />
 			</CardBody>
 			<CardBody className="px-3 py-5 text-small justify-center text-center text-[#f9e28590]">
 			    <iframe 
@@ -84,7 +88,7 @@ export const LaNostraGiornataCard = ({ iconSection, time, location, title, descr
 			         width="100%"
 			         height="100%"
 			         style={{filter: "invert(100%)", border:"0"}}
-			         allowFullScreen="" loading="lazy"
+			         allowFullScreen="" 
 			         referrerPolicy="no-referrer-when-downgrade">
 			      </iframe>
 			</CardBody>

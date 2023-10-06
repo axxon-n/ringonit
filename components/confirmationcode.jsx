@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleInfo
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 export const ConfirmCode = React.forwardRef((props, ref) => {
+
+  const { t, i18n: {changeLanguage, language} } = useTranslation();
 
   const setVisible = () => {
     if (props.isVisible) {
@@ -22,7 +25,7 @@ export const ConfirmCode = React.forwardRef((props, ref) => {
 }}>
   <Popover placement="top">
     <div className="flex items-center">
-      <p className="relative text-small text-foreground-500">Verifica il numero di telefono</p>
+      <p className="relative text-small text-foreground-500">{t('verificaIlNumeroDiTelefonoTitle')}</p>
       <PopoverTrigger>
         <Button isIconOnly variant="light" className="relative text-small text-foreground-500">
           <FontAwesomeIcon style={{ color: "#f9e285", opacity: "0.5" }} icon={faCircleInfo} />
@@ -32,7 +35,7 @@ export const ConfirmCode = React.forwardRef((props, ref) => {
     <PopoverContent>
       {(titleProps) => (
         <div className="px-1 py-2">
-          <div className="text-tiny">Controlla i messaggi inviati al tuo numero di telefono e inserisci il codice</div>
+          <div className="text-tiny">{t('verificaIlNumeroDiTelefonoDescription')}</div>
         </div>
       )}
     </PopoverContent>

@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardFooter, CardHeader, CardBody, Avatar} from "@nextui-org/react";
 import {Heart} from "./heart";
 
-export const ProfileCard = React.forwardRef(({ className, image, name, description, rightToLeftOrder }, ref) => {
+export const ProfileCard = React.forwardRef(({ className, image, name, description, rightToLeftOrder, heartz, newHeart }, ref) => {
 
 	return (
 <Card ref={ref} className={`${className ?? ""}`}>
@@ -15,11 +15,11 @@ export const ProfileCard = React.forwardRef(({ className, image, name, descripti
 	        {name}
 	      </h4>
 	    </div>
-	    <Heart/>
+	    <Heart newHeart={newHeart}/>
   	</div>
 
   	<div className={rightToLeftOrder ? "visible flex gap-5 justify-between w-full" : "hidden"}>
-      <Heart/>
+      <Heart newHeart={newHeart}/>
         <div className="flex gap-5 items-center justify-center">
           <h4 className="font-['Sacramento'] text-[3em] font-semibold leading-none text-[#f9e285]">
             {name}
@@ -36,8 +36,8 @@ export const ProfileCard = React.forwardRef(({ className, image, name, descripti
   </CardBody>
   <CardFooter className={`gap-3 ${rightToLeftOrder ? "justify-start" : "justify-end"}`}>
     <div className="flex gap-1">
-      <p className="font-semibold text-[#f9e28570] text-small">97.1K</p>
-      <p className="text-[#f9e28570] text-small">Hearts</p>
+      <p className="font-semibold text-[#f9e28570] text-small">{heartz.toString()}</p>
+      <p className="text-[#f9e28570] text-small">♥</p>
     </div>
   </CardFooter>
 </Card>

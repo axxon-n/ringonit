@@ -13,8 +13,11 @@ import {
   faWineGlass
 } from "@fortawesome/free-solid-svg-icons";
 import { request_verify_code, enter_verify_code, post_user_info, get_user_info, is_refresh_token_valid, is_user_logged_in } from "../api.js";
+import { useTranslation } from "react-i18next";
 
 export const SignIn = (props) => {
+
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
 
 	const verificationCodeInputRef = React.useRef(null);
 	const phoneInputRef = React.useRef(null);
@@ -41,8 +44,7 @@ export const SignIn = (props) => {
 
 	setTimeout(() => phoneInputRef.current.focus(), 0);
 
-	const initializeData = async () => {
-		setDataLoading(true);
+	const set_user_data = async () => {
 		let userInfo = await get_user_info();
 		setValueFullNameOnlyText(userInfo["user_data"]["name"] || "");
 		setValueInvitees(userInfo["user_data"]["people_number"] || "");
@@ -53,8 +55,13 @@ export const SignIn = (props) => {
 		userInfo["user_data"]["ship_confirm"] ? valuePresenceArray.push("nave") : null;
 		setValuePresence(valuePresenceArray);
 		setValueNotes(userInfo["user_data"]["notes"]);
-		setDataLoading(false);
-		if (is_refresh_token_valid) {
+	}
+
+	const initializeData = async () => {
+		if (is_refresh_token_valid()) {
+			setDataLoading(true);
+			await set_user_data();
+			setDataLoading(false);
 			setStepEnterPhoneNumber(false);
 			setStepVerify(false);
 			setStepCompleteProfile(true);
@@ -109,6 +116,9 @@ export const SignIn = (props) => {
 		console.log("handleVerifyNumber", valueVerificationCode);
 		await enter_verify_code(valuePhone, valueVerificationCode);
 		setStepVerify(false);
+		setDataLoading(true);
+		await set_user_data();
+		setDataLoading(false);
 		setStepCompleteProfile(true);
 		setSigninButtonLoading(false);
 		setTimeout(() => fullNameInputRef.current.focus(), 0);
@@ -221,7 +231,7 @@ export const SignIn = (props) => {
 					setValueFullName(e);
 					setValueFullNameOnlyText(e?.target?.value);
 				}}
-				label="Chi sei?"
+				label={t('chi')}
 			/>
 			<Input
 				isDisabled={userinfoButtonLoading}
@@ -231,7 +241,7 @@ export const SignIn = (props) => {
 				variant="bordered"
 				onChange={handleInvitees}
 				labelPlacement="outside-left"
-				label="Quanti siete?"
+				label={t('quanti')}
 				color={isInviteesValid === "valid" ? "default" : "danger"}
 			    validationState={isInviteesValid}
 			    className="w-[50%]"
@@ -242,7 +252,7 @@ export const SignIn = (props) => {
 		}} className="justify-center">
 	    	<CheckboxGroup
 	    			isDisabled={userinfoButtonLoading}
-		        label="Ci siete per..."
+		        label={t('ciSietePer')}
 		        color="warning"
 		        value={valuePresence}
 		        onValueChange={setValuePresence}
@@ -252,25 +262,25 @@ export const SignIn = (props) => {
 			        <Checkbox value="comune" className="col-span-1">
 			        	<div className="flex gap-x-1 items-center">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faChessRook} />
-			        		<p>Comune</p>
+			        		<p>{t('comuneTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="chiesa" className="col-span-1">
 			        	<div className="flex gap-x-1 items-center">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faChurch} />
-			        		<p>Chiesa</p>
+			        		<p>{t('chiesaTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="rinfresco" className="col-span-1">
 			        	<div className="flex gap-x-1 items-center">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faWineGlass} />
-			        		<p>Rinfresco</p>
+			        		<p>{t('rinfrescoTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="nave" className="col-span-1">
 			        	<div className="flex gap-x-1 items-center">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faShip} />
-			        		<p>Nave</p>
+			        		<p>{t('partyTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			    </div>
@@ -283,7 +293,7 @@ export const SignIn = (props) => {
 					isDisabled={userinfoButtonLoading}
 		      variant="bordered"
 		      value={valueNotes}
-		      placeholder="...se volete dirci qualcosa..."
+		      placeholder={t('notesPH')}
 		      onValueChange={setValueNotes}
 		      className="max-w"
 		    />
@@ -292,7 +302,7 @@ export const SignIn = (props) => {
     <ModalFooter className="grid grid-cols-4 py-4 ">
     	<div className="col-span-2 flex -px-2 items-center">
     		<CircularProgress
-			    aria-label="Loading..."
+			    aria-label={t('loader')}
 			    size="lg"
 			    value={valueLoader}
 			    color="primary"
@@ -309,7 +319,7 @@ export const SignIn = (props) => {
 	        	variant="light" 
 	        	onPress={handleResendVerificationCode}
 	        >
-	          reinvia codice
+	          {t('reCode')}
 	        </Button>
         </div>
     	<div className="col-span-2 gap-2 flex justify-end items-center">

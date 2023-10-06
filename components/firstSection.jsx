@@ -3,8 +3,11 @@ import {Card, CardFooter, CardBody} from "@nextui-org/react";
 import {Discovery} from "./discovery";
 import {Rsvp} from "./rsvp";
 import { gsap, Power3 } from 'gsap';
+import { useTranslation } from "react-i18next";
 
 export const FirstSection = () => {
+
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
 
 	const ref = React.useRef(null);
 
@@ -38,7 +41,7 @@ export const FirstSection = () => {
 			shadow="sm"
     >
     	<CardBody className="items-center">
-	    	<div className="inline-block max-w-lg text-center flex-col items-center justify-center text-[1.5rem] text-[#f9e285] font-['Rochester']">Noi</div>
+	    	<div className="inline-block max-w-lg text-center flex-col items-center justify-center text-[1.5rem] text-[#f9e285] font-['Rochester']">{t('we')}</div>
 			<div className="inline-block max-w-lg text-center flex-col items-center justify-center mt-[2vh]">
 				<h1 className="tracking-tight inline font-['Sacramento'] md:text-8xl text-7xl text-[#f9e285] font-semibold leading-[3rem] md:leading-none grid grid-cols-1">
 					<div>Cristina</div>
@@ -50,21 +53,21 @@ export const FirstSection = () => {
 					<div>Andrea</div>
 				</h1>
 				<div className="justify-center flex mt-[2vh] items-center space-x-1 text-[1.5rem] font-['Rochester'] text-[#f9e285]">
-			    	vi invitiamo a celebrare insieme il nostro matrimonio
+			    	{t('inviteStatement')}
 			    </div>
-				<div className="justify-center flex mt-[2vh] items-center space-x-4 text-[1.5rem] font-['Rochester'] text-[#f9e285]">
-			        <div className="text-right -space-y-2 flex-col border-[#f9e285] ">
-			        	<div>Sabato</div>
-			        	<div className="text-medium">9:00</div>
+				<div className="grid grid-cols-3 divide-x-2 flex mt-[2vh] items-center text-[1.5rem] font-['Rochester'] text-[#f9e285]">
+			        <div className="text-center -space-y-2 flex-col border-[#f9e285]">
+			        	<div>{t('giorno')}</div>
+			        	<div className="text-medium">{t('ora')}</div>
 			        </div>
-			        <div className="inline-block mt-2.5 h-[7vh] w-0.5 self-stretch opacity-70 bg-[#f9e285]"></div>
-			        <div className="text-center text-[2rem] -space-y-2 flex-col border-[#f9e285]">
-			        	15
+			        {/*<div className="inline-block mt-2.5 h-[7vh] w-0.5 self-stretch opacity-70 bg-[#f9e285]"></div>*/}
+			        <div className="text-center text-[2.165rem] -space-y-2 flex-col border-[#f9e285]">
+			        	{t('data')}
 			        </div>
-			        <div className="inline-block mt-2.5 h-[7vh] w-0.5 self-stretch opacity-70 bg-[#f9e285]"></div>
-			        <div className="text-left -space-y-2 flex-col border-[#f9e285]">
-			        	<div>Giugno</div>
-			        	<div className="text-medium">2024</div>
+			        {/*<div className="inline-block mt-2.5 h-[7vh] w-0.5 self-stretch opacity-70 bg-[#f9e285]"></div>*/}
+			        <div className="text-center -space-y-2 flex-col border-[#f9e285]">
+			        	<div>{t('mese')}</div>
+			        	<div className="text-medium">{t('anno')}</div>
 			        </div>
 			    </div>
 			</div>
@@ -78,7 +81,7 @@ export const FirstSection = () => {
 
     <div className='text-center inset-x-0 bottom-0'>
         <audio className='object-center mx-auto mt-1 mb-7' autoPlay={true} loop={true} src="https://ringon.it/img/main_audio.mp3" controls>
-            <p>If you are reading this, it is because your browser does not support the audio element.</p>
+            <p>{t('noAudioDisclaimer')}</p>
         </audio>
         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-down-circle mx-auto mt-2 animate-bounce " width="32" height="32" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#f9e285" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -88,7 +91,7 @@ export const FirstSection = () => {
             <line x1="16" y1="12" x2="12" y2="16" />
         </svg>
         <p className='text-[#f9e285] '>
-            Scopri di più...
+            {t('scopri')}
         </p>
     </div>
 </section>

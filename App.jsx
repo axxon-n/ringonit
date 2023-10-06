@@ -3,6 +3,7 @@ import { Navbar } from "./components/navbar";
 import {FirstSection} from "./components/firstSection";
 import {SecondSection} from "./components/secondSection";
 import {ThirdSection} from "./components/thirdSection";
+import {FourthSection} from "./components/fourthSection";
 
 export default function Home() {
 
@@ -12,6 +13,7 @@ export default function Home() {
 			<Navbar />
 			<SecondSection />
 			<ThirdSection />
+			<FourthSection />
 		</div>
 	);
 }

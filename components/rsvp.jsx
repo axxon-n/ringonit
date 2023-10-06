@@ -3,8 +3,11 @@ import confetti from 'canvas-confetti';
 import {SignIn} from "./signin";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,
 useDisclosure, Button} from "@nextui-org/react";
+import { useTranslation } from "react-i18next";
 
 export const Rsvp = (props) => {
+
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
 
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -33,7 +36,7 @@ export const Rsvp = (props) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Siamo felici di averti con noi!!!</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">{t('feliciDiAvertiConNoi')}</ModalHeader>
               <SignIn onCloseForm={() => onClose()}/>
             </>
           )}

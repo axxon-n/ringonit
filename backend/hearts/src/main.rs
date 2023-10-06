@@ -49,6 +49,8 @@ async fn prepare_response(status_code: u16, resp: ResponseBody) -> Result<Respon
 }
 
 async fn pql<T: for<'a> Deserialize<'a> + std::clone::Clone>(client: dynamodb::Client, statement: String) -> Result<Vec<T>, anyhow::Error> {
+    println!("{}", statement);
+
     let statement_output = match client.execute_statement().statement(statement).send().await {
         Ok(v) => v,
         Err(e) => return Err(e.into())
@@ -112,12 +114,15 @@ async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamo
 
     let entity_field = format!("{entity}_heartz");
 
-    pql::<Heartz>(client_dynamodb.clone(), format!(r#"
+    match pql::<Heartz>(client_dynamodb.clone(), format!(r#"
         UPDATE ringonit_users 
         SET {entity_field} = 0 
         WHERE user_id = '{user_id}' 
           AND {entity_field} IS MISSING;
-    "#)).await?;
+    "#)).await {
+        Ok(_v) => println!("FIRST ROW FOR ENTITY"),
+        Err(e) => println!("ALREADY EXISTS ROW FOR ENTITY -- {:?}", e)  
+    };
 
     pql::<Heartz>(client_dynamodb.clone(), format!(r#"
         UPDATE ringonit_users 
@@ -126,7 +131,7 @@ async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamo
     "#)).await?;
 
     pql::<Heartz>(client_dynamodb, format!(r#"
-        UPDATE ringonit_users 
+        UPDATE ringonit_hearts 
         SET heartz = heartz + 1
         WHERE entity = '{entity}';
     "#)).await?;
@@ -136,12 +141,16 @@ async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamo
 
 async fn main_logic(request_body: RequestBody, claims: HashMap<String, serde_json::Value>, method: String, req_id: String) -> Result<ResponseBody, anyhow::Error> {
     
-    let user_id: &str = match claims.get("user_id") {
-        Some(v) => match v.as_str() {
-            Some(w) => w,
-            None => return Err(anyhow::anyhow!("USER IS NOT A STRING"))
-        },
-        None => return Err(anyhow::anyhow!("NO USER FOUND"))
+    let user_id: &str = if method == "GET" {
+        "anonymous"
+    } else {
+        match claims.get("user_id") {
+            Some(v) => match v.as_str() {
+                Some(w) => w,
+                None => return Err(anyhow::anyhow!("USER IS NOT A STRING"))
+            },
+            None => return Err(anyhow::anyhow!("NO USER FOUND"))
+        }
     };
 
     println!("USER -- {}", user_id);

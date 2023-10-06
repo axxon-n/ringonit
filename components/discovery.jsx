@@ -1,6 +1,7 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,
 useDisclosure, Button} from "@nextui-org/react";
+import { Trans } from 'react-i18next'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChurch,
@@ -9,8 +10,11 @@ import {
   faWineGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import confetti from 'canvas-confetti';
+import { useTranslation } from "react-i18next";
 
 export const Discovery = (props) => {
+
+	const { t, i18n: {changeLanguage, language} } = useTranslation();
 
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -24,13 +28,13 @@ export const Discovery = (props) => {
 	const modalTitleSwitcher = (kkey) => {
 		switch(kkey) {
 			case "chiesa":
-				return "Chiesa";
+				return t('chiesaTitle');
 			case "comune":
-				return "Comune";
+				return t('comuneTitle');
 			case "rinfresco":
-				return "Rinfresco";
+				return t('rinfrescoTitle');
 			case "nave":
-				return "Party";
+				return t('partyTitle');
 			default:
 				return "";
 		};
@@ -40,55 +44,19 @@ export const Discovery = (props) => {
 		switch(kkey) {
 			case "chiesa":
 				return (
-					<><p> 
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p>
-	                <p>
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p></>
+					<Trans i18nKey="chiesaContent" />
 				);
 			case "comune":
 				return (
-					<><p> 
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p>
-	                <p>
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p></>
+					<Trans i18nKey="comuneContent" />
 				);
 			case "rinfresco":
 				return (
-					<><p> 
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p>
-	                <p>
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p></>
+					<Trans i18nKey="rinfrescoContent" />
 				);
 			case "nave":
 				return (
-					<><p> 
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p>
-	                <p>
-	                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-	                  Nullam pulvinar risus non risus hendrerit venenatis.
-	                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-	                </p></>
+					<Trans i18nKey="naveContent" />
 				);
 		};
 	}
@@ -111,7 +79,7 @@ export const Discovery = (props) => {
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
-				Comune
+				{t('comuneTitle')}
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
@@ -122,7 +90,7 @@ export const Discovery = (props) => {
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
-				Chiesa
+				{t('chiesaTitle')}
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
@@ -133,7 +101,7 @@ export const Discovery = (props) => {
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
-				Rinfresco
+				{t('rinfrescoTitle')}
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
@@ -144,7 +112,7 @@ export const Discovery = (props) => {
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
-				Party
+				{t('partyTitle')}
 			</div>
 		</div>
 	</div>
