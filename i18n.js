@@ -19,6 +19,7 @@ i18n.use(LanguageDetector)
 		resources: {
 			en: { ...enJSON },
 		    it: { ...itJSON },
+		    'it-IT': { ...itJSON },
 		    ro: { ...roJSON },
 		    de: { ...deJSON },
 		}, 

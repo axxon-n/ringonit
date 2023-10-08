@@ -1,7 +1,7 @@
 import React from "react";
 import {Phone} from "./phone";
 import {ConfirmCode} from "./confirmationcode";
-import {Input, Textarea, Skeleton, ModalBody, ModalFooter, Button, CheckboxGroup, Checkbox, CircularProgress} from "@nextui-org/react";
+import {Input, Textarea, Skeleton, useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, CheckboxGroup, Checkbox, CircularProgress} from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -10,14 +10,19 @@ import {
   faChurch,
   faShip,
   faChessRook,
-  faWineGlass
+  faWineGlass,
+  faHeartCrack
 } from "@fortawesome/free-solid-svg-icons";
-import { request_verify_code, enter_verify_code, post_user_info, get_user_info, is_refresh_token_valid, is_user_logged_in } from "../api.js";
+import { request_verify_code, signout, remove_sign_in, enter_verify_code, post_user_info, get_user_info, is_refresh_token_valid, is_user_logged_in } from "../api.js";
 import { useTranslation } from "react-i18next";
+import { DownloadCalendar } from "./downloadCalendar";
+import { isValidPhoneNumber } from 'react-phone-number-input'
 
 export const SignIn = (props) => {
 
 	const { t, i18n: {changeLanguage, language} } = useTranslation();
+
+	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
 	const verificationCodeInputRef = React.useRef(null);
 	const phoneInputRef = React.useRef(null);
@@ -31,21 +36,30 @@ export const SignIn = (props) => {
 	const [valueInvitees, setValueInvitees] = React.useState('2');
 	const [valuePresence, setValuePresence] = React.useState([]);
 	const [valueIsLoading, setValueIsLoading] = React.useState(true);
+	const [valueParcheggio, setValueParcheggio] = React.useState(false);
 	const [valueLoader, setValueLoader] = React.useState(30);
 
 	const [isDataLoading, setDataLoading] = React.useState(false);
 	const [signinButtonLoading, setSigninButtonLoading] = React.useState(false);
 	const [signupButtonLoading, setSignupButtonLoading] = React.useState(false);
 	const [userinfoButtonLoading, setUserinfoButtonLoading] = React.useState(false);
+	const [deleteProfileButtonLoading, setDeleteProfileButtonLoading] = React.useState(false);
 
 	const [stepEnterPhoneNumber, setStepEnterPhoneNumber] = React.useState(false);
 	const [stepVerify, setStepVerify] = React.useState(false);
 	const [stepCompleteProfile, setStepCompleteProfile] = React.useState(false);
+	const [stepDeleteProfile, setStepDeleteProfile] = React.useState(false);
+
+	const [textError, setTextError] = React.useState('');
 
 	setTimeout(() => phoneInputRef.current.focus(), 0);
 
 	const set_user_data = async () => {
 		let userInfo = await get_user_info();
+		if (userInfo === null) {
+			remove_sign_in();
+			return false;
+		};
 		setValueFullNameOnlyText(userInfo["user_data"]["name"] || "");
 		setValueInvitees(userInfo["user_data"]["people_number"] || "");
 		let valuePresenceArray = [];
@@ -55,17 +69,28 @@ export const SignIn = (props) => {
 		userInfo["user_data"]["ship_confirm"] ? valuePresenceArray.push("nave") : null;
 		setValuePresence(valuePresenceArray);
 		setValueNotes(userInfo["user_data"]["notes"]);
+		setValueParcheggio(userInfo["user_data"]["needs_park"] || false);
+		return true;
 	}
 
 	const initializeData = async () => {
 		if (is_refresh_token_valid()) {
 			setDataLoading(true);
-			await set_user_data();
+			let retValue = await set_user_data();
 			setDataLoading(false);
-			setStepEnterPhoneNumber(false);
-			setStepVerify(false);
-			setStepCompleteProfile(true);
+			if (retValue) {
+				setStepDeleteProfile(false);
+				setStepEnterPhoneNumber(false);
+				setStepVerify(false);
+				setStepCompleteProfile(true);
+			} else {
+				setStepDeleteProfile(false);
+				setStepEnterPhoneNumber(true);
+				setStepVerify(false);
+				setStepCompleteProfile(false);
+			};
 		} else {
+			setStepDeleteProfile(false);
 			setStepEnterPhoneNumber(true);
 			setStepVerify(false);
 			setStepCompleteProfile(false);
@@ -90,14 +115,22 @@ export const SignIn = (props) => {
 
 	const handleSignIn = async () => {
 		setSignupButtonLoading(true);
-		await request_verify_code(valuePhone, "it");
+		await request_verify_code(valuePhone, language);
 		console.log("handelSignIn", valuePhone);
+		setStepDeleteProfile(false);
 		setStepEnterPhoneNumber(false);
 		setStepVerify(true);
 		setSignupButtonLoading(false);
 		setTimeout(() => verificationCodeInputRef.current.focus(), 0);
 		setResendCodeInterval();
 	};
+
+	const isButtonStepCompleteProfileDisabled = () => {
+		let isDis = valuePresence.length === 0 || 
+		!["1","2","3","4"].includes(valueInvitees.toString()) || 
+		valueFullNameOnlyText === "" ;
+		return isDis;
+	}
 
 	const handleCode = async (e) => {
 		setValueVerificationCode(e);
@@ -118,11 +151,24 @@ export const SignIn = (props) => {
 		setStepVerify(false);
 		setDataLoading(true);
 		await set_user_data();
+		setStepDeleteProfile(false);
 		setDataLoading(false);
 		setStepCompleteProfile(true);
 		setSigninButtonLoading(false);
 		setTimeout(() => fullNameInputRef.current.focus(), 0);
 	};
+
+	const handleConfirmDeleteProfile = () => {
+		setStepDeleteProfile(true);
+		setStepCompleteProfile(false);
+	}
+
+	const handleDeleteProfile = async (onClose) => {
+		setDeleteProfileButtonLoading(true);
+		await signout();
+		setDeleteProfileButtonLoading(false);
+		props.onCloseForm();
+	}
 
 	const handleCompleteProfile = async () => {
 		setUserinfoButtonLoading(true);
@@ -136,7 +182,7 @@ export const SignIn = (props) => {
 	    valuePresence.includes("chiesa"),
 	    valuePresence.includes("rinfresco"),
 	    valuePresence.includes("nave"),
-	    false,
+	    valueParcheggio,
 	    false,
 	    valueNotes
 		);
@@ -187,6 +233,7 @@ export const SignIn = (props) => {
 
 	return (
 <>
+
 	<ModalBody>
 
 			<div className={`${isDataLoading ? "space-y-3" : "hidden"}`}>
@@ -288,7 +335,7 @@ export const SignIn = (props) => {
 	    </div>
 	    <div style={{
 				"display": stepCompleteProfile ? 'flex' : 'none'
-			}} className="justify-center">
+			}} className="justify-center flex-col">
 				<Textarea
 					isDisabled={userinfoButtonLoading}
 		      variant="bordered"
@@ -297,9 +344,31 @@ export const SignIn = (props) => {
 		      onValueChange={setValueNotes}
 		      className="max-w"
 		    />
+		    <Checkbox isDisabled={userinfoButtonLoading} color="warning" defaultSelected={valueParcheggio} isSelected={valueParcheggio} value={valueParcheggio} onValueChange={setValueParcheggio}>
+        	<div className="flex gap-x-1 items-center">
+        		<p>{t('parcheggioCheckbox')}</p>
+        	</div>
+        </Checkbox>
 			</div>
+			<div style={{
+				"display": stepDeleteProfile ? 'flex' : 'none'
+			}} className="justify-center">
+				<Textarea
+					isDisabled={deleteProfileButtonLoading}
+					isReadOnly={true}
+		      variant="underlined"
+		      value={t('eliminaRSVPModalContent')}
+		      className="max-w"
+		    />
+			</div>
+
+			<p style={{
+				"display": textError !== "" ? 'flex' : 'none'
+			}} className="justify-center text-center text-red-400">{t(textError)}</p>
     </ModalBody>
     <ModalFooter className="grid grid-cols-4 py-4 ">
+
+
     	<div className="col-span-2 flex -px-2 items-center">
     		<CircularProgress
 			    aria-label={t('loader')}
@@ -321,14 +390,44 @@ export const SignIn = (props) => {
 	        >
 	          {t('reCode')}
 	        </Button>
+
+	        <Button 
+	        	isDisabled={userinfoButtonLoading}
+	       	 	className={stepCompleteProfile ? "visible text-[#f9e285] break-words" : "hidden"} 
+	        	color="primary" 
+	        	variant="light" 
+	        	onPress={handleConfirmDeleteProfile}
+	        >
+	          {t('eliminaRSVP')}
+	        </Button>
+
         </div>
     	<div className="col-span-2 gap-2 flex justify-end items-center">
-	        <Button isIconOnly color="danger" variant="flat" onClick={props.onCloseForm}>
+
+	        <Button isIconOnly className={stepEnterPhoneNumber || stepCompleteProfile || stepVerify ? "visible" : "hidden"}  color="danger" variant="flat" onClick={props.onCloseForm}>
 	          <FontAwesomeIcon icon={faCircleXmark} />
+	        </Button>
+
+	        <Button isIconOnly className={stepDeleteProfile ? "visible" : "hidden"}  color="danger" variant="flat" onClick={
+	        	() => {
+	        		setStepCompleteProfile(true);
+	        		setStepDeleteProfile(false);
+	        	}
+	        }>
+	          <FontAwesomeIcon icon={faCircleXmark} />
+	        </Button>
+
+	        <Button 
+	        	isIconOnly 
+	        	isDisabled={isButtonStepCompleteProfileDisabled()}
+	        	className={stepCompleteProfile ? "visible" : "hidden"} 
+	        >
+	          <DownloadCalendar />
 	        </Button>
 	        <Button 
 	        	isIconOnly 
 	        	isLoading={signupButtonLoading}
+	        	isDisabled={valuePhone && !isValidPhoneNumber(valuePhone) || !valuePhone}
 	        	className={stepEnterPhoneNumber ? "visible" : "hidden"} 
 	        	color="primary" 
 	        	onPress={handleSignIn}
@@ -338,6 +437,7 @@ export const SignIn = (props) => {
 	        </Button>
 	        <Button 
 	        	isIconOnly 
+	        	isDisabled={valueVerificationCode.length !== 6}
 	        	isLoading={signinButtonLoading}
 	        	className={stepVerify ? "visible" : "hidden"} 
 	        	color="primary" 
@@ -348,6 +448,7 @@ export const SignIn = (props) => {
 	        </Button>
 	        <Button 
 	        	isIconOnly 
+	        	isDisabled={isButtonStepCompleteProfileDisabled()}
 	        	isLoading={userinfoButtonLoading}
 	        	className={stepCompleteProfile ? "visible" : "hidden"} 
 	        	color="success" 
@@ -355,6 +456,17 @@ export const SignIn = (props) => {
 	        	spinner={buttonSpinnerComponent()}
 	        >
 	          <FontAwesomeIcon className={userinfoButtonLoading ? "hidden" : "visible"} icon={faCircleCheck} />
+	        </Button>
+
+	        <Button 
+	        	isIconOnly 
+	        	isLoading={deleteProfileButtonLoading}
+	        	className={stepDeleteProfile ? "visible" : "hidden"} 
+	        	color="primary" 
+	        	onPress={handleDeleteProfile}
+	        	spinner={buttonSpinnerComponent()}
+	        >
+	          <FontAwesomeIcon className={deleteProfileButtonLoading ? "hidden" : "visible"} icon={faCircleCheck} />
 	        </Button>
         </div>
     </ModalFooter>

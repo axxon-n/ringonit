@@ -36,7 +36,7 @@ export const Rsvp = (props) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">{t('feliciDiAvertiConNoi')}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 font-['Rochester'] text-[#f9e285] text-[1.4em]">{t('feliciDiAvertiConNoi')}</ModalHeader>
               <SignIn onCloseForm={() => onClose()}/>
             </>
           )}

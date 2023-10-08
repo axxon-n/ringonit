@@ -33,17 +33,17 @@ export const FirstSection = () => {
     'borderWidth': '10px',
     'borderRadius': '1em',
     'borderColor': 'black'
-  }} className="-z-1 h-screen flex flex-col items-center justify-center gap-4 rounded w-full h-full bg-center bg-cover" data-scroll-section>
+  }} className="-z-1 h-screen min-h-[800px] flex flex-col items-center justify-center gap-4 rounded w-full h-full bg-center bg-cover" data-scroll-section>
 	<Card
 		ref = {ref}
-      isBlurred
-      className="opacity-0 border-none bg-background/60 bg-default-100/10 w-[80vw] h-[70vh] min-h-[70vh] md:w-[40vw] lg:min-w-[80vw] backdrop-blur-sm items-center justify-center"
-			shadow="sm"
+     	isBlurred
+      	className="opacity-0 border-none bg-background/60 bg-default-100/10 w-[80vw] h-[70vh] min-h-[550px] md:w-[40vw] lg:min-w-[80vw] backdrop-blur-sm items-center justify-center"
+		shadow="sm"
     >
     	<CardBody className="items-center">
 	    	<div className="inline-block max-w-lg text-center flex-col items-center justify-center text-[1.5rem] text-[#f9e285] font-['Rochester']">{t('we')}</div>
 			<div className="inline-block max-w-lg text-center flex-col items-center justify-center mt-[2vh]">
-				<h1 className="tracking-tight inline font-['Sacramento'] md:text-8xl text-7xl text-[#f9e285] font-semibold leading-[3rem] md:leading-none grid grid-cols-1">
+				<h1 className="tracking-tight inline font-['Sacramento'] lg:text-8xl text-7xl text-[#f9e285] font-semibold leading-[3rem] md:leading-none grid grid-cols-1">
 					<div>Cristina</div>
 					<div className="text-[3.5rem] px-3 md:px-20 relative flex items-center">
 					    <div className="flex-grow border-t border-[#f9e285]"></div>
@@ -73,7 +73,7 @@ export const FirstSection = () => {
 			</div>
 		</CardBody>
 
-        <CardFooter className="bg-default-100/90 justify-center gap-4 lg:gap-[3vw] before:bg-white/10 border-white/20 border-0 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+        <CardFooter className="bg-default-100/90 justify-center gap-4 lg:gap-[3vw] before:bg-white/10 border-white/20 border-0 overflow-hidden py-0 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
         	<Discovery noText={false}/>
         	<Rsvp/>
 	    </CardFooter>

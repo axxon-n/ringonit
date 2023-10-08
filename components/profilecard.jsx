@@ -29,8 +29,8 @@ export const ProfileCard = React.forwardRef(({ className, image, name, descripti
     </div>
     
   </CardHeader>
-  <CardBody className="px-3 py-0 text-small justify-center text-center text-[#f9e28590]">
-    <p>
+  <CardBody className="px-3 py-0 mt-2 text-small justify-center item-center text-center text-[#f9e28590]">
+    <p className="item-center">
       {description}
     </p>
   </CardBody>

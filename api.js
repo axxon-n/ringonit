@@ -42,6 +42,11 @@ export const signout = async () => {
 	return response;
 }
 
+export const remove_sign_in = () => {
+	deleteCookie("access_token");
+	deleteCookie("refresh_token");
+}
+
 export const get_user_info = async () => {
 	const response = await api(
 		"/userinfo", 
@@ -216,7 +221,10 @@ const api = async(
 	};
 
 	const response = await fetch(API_BASE_URL + endpoint, request);
-
-	return response.json();
+	if (response.status > 199 && response.status < 299){
+		return response.json();
+	} else {
+		return null
+	}
 
 }

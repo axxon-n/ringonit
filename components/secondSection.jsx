@@ -210,7 +210,7 @@ export const SecondSection = () => {
 
 		<ProfileCard
 			ref={cristina1}
-			className="opacity-0 col-span-12 sm:col-span-3 h-full overflow-visible sm:overflow-hidden sm:h-[20rem] sm:mt-[20%] hidden sm:flex"
+			className="landscape:min-h-[300px] landscape:min-w-[300px] landscape:z-10 opacity-0 col-span-12 sm:col-span-3 h-full overflow-visible sm:overflow-hidden sm:h-[20rem] sm:mt-[20%] hidden sm:flex"
 			image="profilo_cristina.jpeg"
 			name="Cristina"
 			description={t('brideDescription')}
@@ -237,7 +237,7 @@ export const SecondSection = () => {
 
     <ProfileCard
     	ref={cristina}
-			className="opacity-0 col-span-12 sm:col-span-3 overflow-visible sm:overflow-hidden h-full sm:h-[50%] sm:mt-[20%] flex sm:hidden"
+			className="landscape:min-h-[300px] landscape:min-w-[300px] opacity-0 col-span-12 sm:col-span-3 overflow-visible sm:overflow-hidden h-full sm:h-[50%] sm:mt-[20%] flex sm:hidden"
 			image="profilo_cristina.jpeg"
 			name="Cristina"
 			description={t('brideDescription')}
@@ -248,7 +248,7 @@ export const SecondSection = () => {
 
     <ProfileCard
     	ref={andrea}
-    	className="opacity-0 col-span-12 sm:col-span-3 sm:h-[20rem] overflow-visible sm:overflow-hidden h-full sm:mt-[20%]"
+    	className="landscape:min-h-[300px] landscape:min-w-[300px] landscape:z-10 landscape:-ml-[100px] landscape:lg:ml-[0px] opacity-0 col-span-12 sm:col-span-3 sm:h-[20rem] overflow-visible sm:overflow-hidden h-full sm:mt-[20%]"
 			image="profilo_andrea.png"
 			name="Andrea"
 			description={t('groomDescription')}
@@ -280,7 +280,7 @@ export const SecondSection = () => {
 	    </div>
 	    
 	  </CardHeader>
-	  <CardBody className="px-3 sm:py-0 py-10 text-small justify-center text-center text-[#f9e28590]">
+	  <CardBody className="landscape:min-h-[300px] px-3 sm:py-0 py-10 text-small text-center  text-[#f9e28590]">
 	    <Trans i18nKey="sempreInsiemeContent" />
 	  </CardBody>
 	</Card>
@@ -298,7 +298,7 @@ export const SecondSection = () => {
       </CardFooter>
     </Card>
 
-    <Card ref={nero1} className="heart sm:col-span-1 hidden ml-5 sm:flex opacity-0 w-auto sm:h-[50%] sm:mt-[70%] col-span-1 items-center text-center justify-center overflow-visible">
+    <Card ref={nero1} className="heart landscape:z-10 sm:col-span-1 hidden ml-5 sm:flex opacity-0 w-auto sm:h-[50%] sm:mt-[70%] col-span-1 items-center text-center justify-center overflow-visible">
       <Image
         removeWrapper
         loading='lazy'
@@ -324,7 +324,7 @@ export const SecondSection = () => {
       </CardFooter>
     </Card>
 
-    <Card ref={gigi1} className="heart hidden sm:col-span-1 sm:flex opacity-0 w-auto sm:h-[50%] sm:mt-[70%] col-span-1 items-center text-center justify-center">
+    <Card ref={gigi1} className="heart landscape:z-10 landscape:-ml-[100px] landscape:lg:ml-[0px] hidden sm:col-span-1 sm:flex opacity-0 w-auto sm:h-[50%] sm:mt-[70%] col-span-1 items-center text-center justify-center">
       <Image
         removeWrapper
         loading='lazy'

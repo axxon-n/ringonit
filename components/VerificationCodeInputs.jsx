@@ -9,6 +9,7 @@ const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, i
     myRefs.current = code.map((_, i) => myRefs.current[i] ?? React.createRef());
 
     const handleCode = (ev, value, index) => {
+
         const newCode = [...code];
         const remainingFields = codeLength - index;
         const newValue = value.length ? value.split('', remainingFields) : [''];
@@ -19,7 +20,7 @@ const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, i
         setCode(newCode);
 
         if(value.length && value.length < codeLength  && index !== codeLength - 1) {
-            (target.nextElementSibling || null).focus();
+            (target.nextElementSibling || null).focus({preventScroll: true});
         }
         if(value.length === codeLength) {
             target.blur();
