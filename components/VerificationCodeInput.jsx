@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const VerificationCodeInput = React.forwardRef(({handleCode, handleKey, char, index, maxLength, disabled}, ref) => {
+const VerificationCodeInput = React.forwardRef(({handleCode, handleKey, char, index, maxLength, disabled, onKeyPress}, ref) => {
 
     const inputRef = React.useRef(null);
 
@@ -37,6 +37,7 @@ const VerificationCodeInput = React.forwardRef(({handleCode, handleKey, char, in
             value={char}
             onFocus={handleFocus}
             maxLength={maxLength}
+            onKeyPress={onKeyPress}
             variant="bordered"
             className="relative text-center w-full inline-flex flex-row items-center shadow-sm px-3 gap-3 border-medium border-default-200 hover:[&:not(:focus-within)]:border-default-400 focus-within:placeholder-transparent focus-within:border-foreground focus-visible:outline-none h-unit-10 min-h-unit-10 rounded-medium transition-background !duration-150 transition-colors motion-reduce:transition-none"
         />

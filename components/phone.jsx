@@ -30,10 +30,13 @@ export const Phone = React.forwardRef((props, ref) => {
 
 	React.useEffect(() => {
 	    let phoneCountries = document.getElementsByClassName('PhoneInputCountrySelect');
-	    for (let phoneCountry of phoneCountries[0]) {
-	    	if (!["IT","GB","RO","DE","ZZ"].includes(phoneCountry['value'])) {
-	    		phoneCountry.hidden = true
-	    	}
+	    let idx = -1;
+	    while (phoneCountries[0].length > 5) {
+	    	idx += 1;
+	    	if (!["IT","GB","RO","DE","ZZ"].includes(phoneCountries[0][idx]['value'])) {
+	    		phoneCountries[0].remove(idx);
+	    		idx -= 1;
+	    	};
 	    };
 	}, []);
 
@@ -55,6 +58,7 @@ export const Phone = React.forwardRef((props, ref) => {
 	      		props.setValuePhone(v)
 	      	};
 	      }}
+	      onKeyPress={props.onKeyPress}
 	      style={{
 	      	cursor: 'text',
 	      	display: props.isVisible ? 'flex' : 'none'

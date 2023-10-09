@@ -75,14 +75,14 @@ export const post_user_info = async (
 		"POST", 
 		{
 			"name": name,
-		    "people_number": people_number,
-		    "ship_confirm": ship_confirm,
-		    "munic_confirm": munic_confirm,
-		    "party_confirm": party_confirm,
-		    "church_confirm": church_confirm,
-		    "needs_park": needs_park,
-		    "hotel_self_hosted": hotel_self_hosted,
-		    "notes": notes
+	    "people_number": people_number,
+	    "ship_confirm": ship_confirm,
+	    "munic_confirm": munic_confirm,
+	    "party_confirm": party_confirm,
+	    "church_confirm": church_confirm,
+	    "needs_park": needs_park,
+	    "hotel_self_hosted": hotel_self_hosted,
+	    "notes": notes
 		}, 
 		{"Content-Type": "application/json"}, 
 		true
@@ -221,7 +221,7 @@ const api = async(
 	};
 
 	const response = await fetch(API_BASE_URL + endpoint, request);
-	if (response.status > 199 && response.status < 299){
+	if (response.status > 199 && response.status < 300){
 		return response.json();
 	} else {
 		return null

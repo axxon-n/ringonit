@@ -280,7 +280,7 @@ export const SecondSection = () => {
 	    </div>
 	    
 	  </CardHeader>
-	  <CardBody className="landscape:min-h-[300px] px-3 sm:py-0 py-10 text-small text-center  text-[#f9e28590]">
+	  <CardBody className="landscape:min-h-[300px] px-3 sm:py-0 py-10 text-small text-center md:mt-10 text-[#f9e28590]">
 	    <Trans i18nKey="sempreInsiemeContent" />
 	  </CardBody>
 	</Card>

@@ -20,6 +20,13 @@ export const Rsvp = (props) => {
 	   onOpen();
 	};
 
+	// const onOpenChangeForm = (e) => {
+	// 	// // onOpenChangeForm({isFromSignIn: true, setOpen: false})
+	// 	if (e?.isFromSignIn) {
+	// 		onOpenChange(e?.setOpen || true);
+	// 	};
+	// }
+
 	return (
 <>
 	<Button className={`align-center outline-none justify-center ${props.textSize ? `text-[${props.textSize}]` : "text-[1.8rem]"}  font-['Rochester'] text-[#f9e285] ${props.additionalClassData ?? "border-[#f9e285] py-6"}`} 
@@ -32,6 +39,7 @@ export const Rsvp = (props) => {
         onOpenChange={onOpenChange} 
         placement="auto"
         backdrop="blur"
+        isDismissable={false}
     >
         <ModalContent>
           {(onClose) => (

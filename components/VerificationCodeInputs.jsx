@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import VerificationCodeInput from './VerificationCodeInput';
 
-const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, isDisabled}, ref) => {
+const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, isDisabled, onKeyPress}, ref) => {
     const emptyCode = Array(codeLength).fill('');
     const [code, setCode] = useState(emptyCode);
 
@@ -35,21 +35,21 @@ const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, i
     const handleKey = (ev, index) => {
         const target = ev.currentTarget;
         if(ev.key === 'Backspace' && target.value === '' && index) {
-            (target.previousElementSibling || null).focus();
+            (target.previousElementSibling || null).focus({preventScroll: true});
         }
         if(ev.key === 'ArrowLeft') {
             const prevElement = target.previousElementSibling || null;
-            if(prevElement) prevElement.focus();
+            if(prevElement) prevElement.focus({preventScroll: true});
         }
         if(ev.key === 'ArrowRight') {
             const nextElement = target.nextElementSibling || null;
-            if(nextElement) nextElement.focus();
+            if(nextElement) nextElement.focus({preventScroll: true});
         }
     }
 
     React.useImperativeHandle(ref, () => ({
         focus: () => {
-          myRefs.current[0].current.focus();
+          myRefs.current[0].current.focus({preventScroll: true});
         },
         setEmpty: () => {
             setCode(emptyCode);
@@ -69,6 +69,7 @@ const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, i
                             char={char} 
                             index={index} 
                             maxLength={codeLength}
+                            onKeyPress={onKeyPress}
                         />
                     ))
                 }

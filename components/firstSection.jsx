@@ -43,7 +43,7 @@ export const FirstSection = () => {
     	<CardBody className="items-center">
 	    	<div className="inline-block max-w-lg text-center flex-col items-center justify-center text-[1.5rem] text-[#f9e285] font-['Rochester']">{t('we')}</div>
 			<div className="inline-block max-w-lg text-center flex-col items-center justify-center mt-[2vh]">
-				<h1 className="tracking-tight inline font-['Sacramento'] lg:text-8xl text-7xl text-[#f9e285] font-semibold leading-[3rem] md:leading-none grid grid-cols-1">
+				<h1 className="tracking-tight inline font-['Sacramento'] lg:text-8xl text-7xl  text-[#f9e285] font-semibold leading-[3rem] md:leading-none grid grid-cols-1">
 					<div>Cristina</div>
 					<div className="text-[3.5rem] px-3 md:px-20 relative flex items-center">
 					    <div className="flex-grow border-t border-[#f9e285]"></div>

@@ -73,6 +73,30 @@ export const SignIn = (props) => {
 		return true;
 	}
 
+	const handleSignUpKeyPress = async (event) => {
+		if(event.key === 'Enter'){
+			if (valuePhone && isValidPhoneNumber(valuePhone)) {
+				await handleSignIn();
+			};
+		};
+	}
+
+	const handleSignInKeyPress = async (event) => {
+		if(event.key === 'Enter'){
+			if (valueVerificationCode.length === 6) {
+				await handleVerifyNumber();
+			};
+		};
+	}
+
+	const handleCompleteProfileKeyPress = async (event) => {
+		if(event.key === 'Enter'){
+			if (!isButtonStepCompleteProfileDisabled()) {
+				await handleCompleteProfile();
+			};
+		};
+	}
+
 	const initializeData = async () => {
 		if (is_refresh_token_valid()) {
 			setDataLoading(true);
@@ -257,6 +281,7 @@ export const SignIn = (props) => {
       		isVisible={stepEnterPhoneNumber}
 			valuePhone={valuePhone} 
 			setValuePhone={setValuePhone} 
+			onKeyPress={handleSignUpKeyPress}
 		/>
 		<ConfirmCode 
 			ref={verificationCodeInputRef}
@@ -264,6 +289,7 @@ export const SignIn = (props) => {
 			isDisabled={signinButtonLoading}
 			value={valueVerificationCode}
 			onChange={handleCode}
+			onKeyPress={handleSignInKeyPress}
 		/>
 		<div style={{
 			"display": stepCompleteProfile ? 'flex' : 'none'
@@ -278,6 +304,7 @@ export const SignIn = (props) => {
 					setValueFullName(e);
 					setValueFullNameOnlyText(e?.target?.value);
 				}}
+				onKeyPress={handleCompleteProfileKeyPress}
 				label={t('chi')}
 			/>
 			<Input
@@ -289,6 +316,7 @@ export const SignIn = (props) => {
 				onChange={handleInvitees}
 				labelPlacement="outside-left"
 				label={t('quanti')}
+				onKeyPress={handleCompleteProfileKeyPress}
 				color={isInviteesValid === "valid" ? "default" : "danger"}
 			    validationState={isInviteesValid}
 			    className="w-[50%]"
@@ -342,6 +370,7 @@ export const SignIn = (props) => {
 		      value={valueNotes}
 		      placeholder={t('notesPH')}
 		      onValueChange={setValueNotes}
+		      onKeyPress={handleCompleteProfileKeyPress}
 		      className="max-w"
 		    />
 		    <Checkbox isDisabled={userinfoButtonLoading} color="warning" defaultSelected={valueParcheggio} isSelected={valueParcheggio} value={valueParcheggio} onValueChange={setValueParcheggio}>
@@ -393,9 +422,9 @@ export const SignIn = (props) => {
 
 	        <Button 
 	        	isDisabled={userinfoButtonLoading}
-	       	 	className={stepCompleteProfile ? "visible text-[#f9e285] break-words" : "hidden"} 
+	       	 	className={stepCompleteProfile ? "outline-none border-[#f9e285] text-[#f9e285] break-words" : "hidden"} 
 	        	color="primary" 
-	        	variant="light" 
+	        	variant="bordered" 
 	        	onPress={handleConfirmDeleteProfile}
 	        >
 	          {t('eliminaRSVP')}

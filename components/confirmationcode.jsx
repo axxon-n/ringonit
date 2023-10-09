@@ -46,6 +46,7 @@ export const ConfirmCode = React.forwardRef((props, ref) => {
     isDisabled={props.isDisabled}
     value={props.value}
     onChange={props.onChange}
+    onKeyPress={props.onKeyPress}
   />
 </div>
   );
