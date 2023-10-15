@@ -110,7 +110,7 @@ export const ThirdSection = ()  => {
 			<div className="flex flex-row justify-between">                                                                                
 			<p className="text-left ml-5 sm:ml-20 text-[0.9em] sm:text-[1em]"><Trans i18nKey="thirdSection46"/></p>
 			<div className="text-right hidden md:flex mr-5 sm:mr-20">
-			<Rsvp textSize="0.7rem"/>
+			<Rsvp textSize="0.7rem" additionalClassData="text-[1.5rem] border-[#f9e285]"/>
 			</div>
 			</div>
 
@@ -127,7 +127,7 @@ export const ThirdSection = ()  => {
 			<p className="text-right mr-5"><Trans i18nKey="thirdSection62"/></p>
 			<p className="text-right mr-5"><Trans i18nKey="thirdSection63"/></p>   
 			<div className="text-right mr-5">
-			<Rsvp textSize="0.7rem"/>
+			<Rsvp textSize="0.7rem" additionalClassData="text-[1.5rem] border-[#f9e285]"/>
 			</div>
 			</div>
 
@@ -183,7 +183,7 @@ export const ThirdSection = ()  => {
 			<div className="flex flex-row justify-between">                                                                                
 			<p className="text-left ml-5 sm:ml-20 text-[0.9em] sm:text-[1em]"><Trans i18nKey="thirdSection119"/></p>
 			<div className="text-right hidden md:flex mr-5 sm:mr-20">
-			<Rsvp textSize="0.7rem"/>
+			<Rsvp textSize="0.7rem" additionalClassData="text-[1.5rem] border-[#f9e285]"/>
 			</div>
 			</div>
 
@@ -200,7 +200,7 @@ export const ThirdSection = ()  => {
 			<p className="text-right mr-5"><Trans i18nKey="thirdSection135"/></p>
 			<p className="text-right mr-5"><Trans i18nKey="thirdSection136"/></p>   
 			<div className="text-right mr-5">
-			<Rsvp textSize="0.7rem"/>
+			<Rsvp textSize="0.7rem" additionalClassData="text-[1.5rem] border-[#f9e285]"/>
 			</div>
 			</div>
 

@@ -309,13 +309,27 @@ export const SignIn = (props) => {
 			/>
 			<Input
 				isDisabled={userinfoButtonLoading}
-				isRequired
 				value={valueInvitees}
 				inputMode="numeric" 
 				variant="bordered"
 				onChange={handleInvitees}
 				labelPlacement="outside-left"
-				label={t('quanti')}
+				label={(
+					<>
+						<label 
+							class="xs:hidden ss:block text-small font-medium text-foreground pr-2 after:text-danger after:content-['*'] after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
+							id="react-aria8319736442-:r1f:" 
+							for="react-aria8319736442-:r1e:"
+						>{t('quanti')}
+						</label>
+						<label 
+							class="xs:block ss:hidden text-small font-medium text-foreground pr-0 after:text-danger after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
+							id="react-aria8319736442-:r1f:" 
+							for="react-aria8319736442-:r1e:"
+						>{t('in')}
+						</label>
+					</>
+				)}
 				onKeyPress={handleCompleteProfileKeyPress}
 				color={isInviteesValid === "valid" ? "default" : "danger"}
 			    validationState={isInviteesValid}
@@ -327,7 +341,7 @@ export const SignIn = (props) => {
 		}} className="justify-center">
 	    	<CheckboxGroup
 	    			isDisabled={userinfoButtonLoading}
-		        label={t('ciSietePer')}
+		        label={(<span class="relative text-small text-foreground-500">{t('ciSietePer')}</span>)}
 		        color="warning"
 		        value={valuePresence}
 		        onValueChange={setValuePresence}
@@ -335,25 +349,25 @@ export const SignIn = (props) => {
 	      	>	
 	      		<div className="grid grid-cols-2 gap-x-5 gap-y-2">
 			        <Checkbox value="comune" className="col-span-1">
-			        	<div className="flex gap-x-1 items-center">
+			        	<div className="flex gap-x-1 items-center xs:text-[0.7em] ss:text-[1em]">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faChessRook} />
 			        		<p>{t('comuneTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="chiesa" className="col-span-1">
-			        	<div className="flex gap-x-1 items-center">
+			        	<div className="flex gap-x-1 items-center xs:text-[0.7em] ss:text-[1em]">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faChurch} />
 			        		<p>{t('chiesaTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="rinfresco" className="col-span-1">
-			        	<div className="flex gap-x-1 items-center">
+			        	<div className="flex gap-x-1 items-center xs:text-[0.7em] ss:text-[1em]">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faWineGlass} />
 			        		<p>{t('rinfrescoTitle')}</p>
 			        	</div>
 			        </Checkbox>
 			        <Checkbox value="nave" className="col-span-1">
-			        	<div className="flex gap-x-1 items-center">
+			        	<div className="flex gap-x-1 items-center xs:text-[0.7em] ss:text-[1em]">
 			        		<FontAwesomeIcon style={{ color: "#f9e285" }} icon={faShip} />
 			        		<p>{t('partyTitle')}</p>
 			        	</div>
@@ -375,7 +389,7 @@ export const SignIn = (props) => {
 		    />
 		    <Checkbox isDisabled={userinfoButtonLoading} color="warning" defaultSelected={valueParcheggio} isSelected={valueParcheggio} value={valueParcheggio} onValueChange={setValueParcheggio}>
         	<div className="flex gap-x-1 items-center">
-        		<p>{t('parcheggioCheckbox')}</p>
+        		<p className="xs:text-[0.7em] ss:text-[1em]">{t('parcheggioCheckbox')}</p>
         	</div>
         </Checkbox>
 			</div>
@@ -422,7 +436,7 @@ export const SignIn = (props) => {
 
 	        <Button 
 	        	isDisabled={userinfoButtonLoading}
-	       	 	className={stepCompleteProfile ? "outline-none border-[#f9e285] text-[#f9e285] break-words" : "hidden"} 
+	       	 	className={stepCompleteProfile ? "xs:text-[0.6em] ss:text-[1em] outline-none border-[#f9e285] text-[#f9e285] break-words" : "hidden"} 
 	        	color="primary" 
 	        	variant="bordered" 
 	        	onPress={handleConfirmDeleteProfile}
@@ -433,9 +447,9 @@ export const SignIn = (props) => {
         </div>
     	<div className="col-span-2 gap-2 flex justify-end items-center">
 
-	        <Button isIconOnly className={stepEnterPhoneNumber || stepCompleteProfile || stepVerify ? "visible" : "hidden"}  color="danger" variant="flat" onClick={props.onCloseForm}>
+	        {/*<Button isIconOnly className={stepEnterPhoneNumber || stepCompleteProfile || stepVerify ? "visible" : "hidden"}  color="danger" variant="flat" onClick={props.onCloseForm}>
 	          <FontAwesomeIcon icon={faCircleXmark} />
-	        </Button>
+	        </Button>*/}
 
 	        <Button isIconOnly className={stepDeleteProfile ? "visible" : "hidden"}  color="danger" variant="flat" onClick={
 	        	() => {

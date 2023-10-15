@@ -29,7 +29,7 @@ export const FourthSection = ()  => {
 	</Card>
 	<div className='flex-col flex items-center justify-center text-center'>
 		<video controls autoPlay="" poster="https://ringon.it/img/image_16_2.png" src="https://ringon.it/img/main_video.MP4" type="video/mp4" className="items-center justify-center text-center" style={{ width: 'auto', height: '75vh' }}></video>
-		<h4 className="font-['Rochester'] text-[1.5em] mt-2 text-center font-semibold  leading-none text-[#f9e285]">
+		<h4 className="font-['Rochester'] xs:text-[1em] ss:text-[1.5em] mt-2 xs:ml-2 xs:mr-2 ss:ml-0 ss:mr-0 text-center font-semibold  leading-none text-[#f9e285]">
           {t('galleryPH')}
         </h4>
 	</div>

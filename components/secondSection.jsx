@@ -186,7 +186,7 @@ export const SecondSection = () => {
 		    toggleActions: "play none none reverse"
 		  }
 		});
-	});
+	}, []);
 
 	return (
 <section id="story" className="border-1 rounded-2xl pb-10 border-[#f9e285] h-full flex flex-col items-center justify-center gap-4 w-full" data-scroll-section>

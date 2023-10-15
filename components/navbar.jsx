@@ -44,14 +44,14 @@ export const Navbar = () => {
 			</NavbarContent>
 
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-				<Discovery noText={true} iconsHeight="1.5em" />
+				<Discovery noText={true} iconStyle="text-[#f9e285] xs:text-[1em] ss:text-[1.5em]" />
 			</NavbarContent>
 
 			<NavbarContent
 				className="flex basis-1/5 sm:basis-full"
 				justify="end"
 			>	
-				<Rsvp textSize="1rem" additionalClassData="border-transparent"/>
+				<Rsvp additionalClassData="border-transparent xs:text-[0.7rem] ss:text-[1rem]"/>
 			</NavbarContent>
 
 		</NextUINavbar>

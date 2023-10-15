@@ -1,7 +1,8 @@
 {
     "translations": {
+        "in": "In",
     "headerTitle": "Der Titel meiner {{appName}}",
-    "inviteStatement": "Wir laden Sie ein, unsere Hochzeit gemeinsam zu feiern",
+    "inviteStatement": "laden Sie ein, unsere Hochzeit gemeinsam zu feiern",
     "we": "Wir",
     "giorno": "Samstag",
     "data": "15",
@@ -110,8 +111,8 @@
     "thirdSection97": "Abfahrt um 19:00 Uhr (bei schlechtem Wetter feiern wir im Hafen) ",
     "thirdSection99": "Die Motonave New Ghibli bietet uns eine spektakuläre Kulisse, während wir in den Sonnenuntergang segeln, und wir können es kaum erwarten, diesen magischen Moment mit Ihnen allen zu teilen.",
     "thirdSection101": "Von 19:00 bis 21:00 Uhr: Musik, Apericena und Traditionen. ",
-    "thirdSection102": "Von 21:00 bis 23:00 Uhr: Abendessen + Kuchen + Reden. ",
-    "thirdSection103": "Von 23:00 bis 01:00 Uhr: Party mit Getränken, Musik und Tanzen.  ",
+    "thirdSection102": "Von 21:00 bis 23:00 Uhr: Abendessen, Reden, Kuchen.",
+    "thirdSection103": "Von 23:00 bis 01:00 Uhr: Gemeinsam mit DJ Lori Zama Party mit Drinks, Musik, Tanz.",
     "thirdSection105": "Und zu guter Letzt, für die Jüngsten und diejenigen, die noch weiter feiern wollen, wird es die rumänische Tradition geben...",
     "thirdSection107": "Um 01:00 Uhr am 16. Juni 2024: 'Brautentführung'",
     "thirdSection111": "Kleiderordnung - Cervia   ",

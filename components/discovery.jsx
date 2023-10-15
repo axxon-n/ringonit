@@ -112,10 +112,10 @@ export const Discovery = (props) => {
 <>
 	<div className="flex lg:gap-10 text-[1.3rem]">
     	<div className="flex flex-col justify-center text-center items-center">
-	        <Button isIconOnly variant="light" onPress={() => handleOpen("comune")} className="outline-none">
+	        <Button isIconOnly variant="light" onPress={() => handleOpen("comune")} className="outline-none xs:max-w-[20px] ss:max-w-auto xs:min-w-unit-7 ss:min-w-unit-10">
 		        <FontAwesomeIcon
 				    icon={faChessRook}
-				    style={{ color: "#f9e285", height: props.iconsHeight ?? '2em' }}
+				   	className={props.iconStyle}
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
@@ -123,10 +123,10 @@ export const Discovery = (props) => {
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
-			<Button isIconOnly variant="light" onPress={() => handleOpen("chiesa")} className="outline-none">
+			<Button isIconOnly variant="light" onPress={() => handleOpen("chiesa")} className="outline-none xs:max-w-[20px] ss:max-w-auto xs:min-w-unit-7 ss:min-w-unit-10">
 				<FontAwesomeIcon
 				    icon={faChurch}
-				    style={{ color: "#f9e285", height: props.iconsHeight ?? '2em' }}
+				    className={props.iconStyle}
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
@@ -134,10 +134,10 @@ export const Discovery = (props) => {
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
-			<Button isIconOnly variant="light" onPress={() => handleOpen("rinfresco")} className="outline-none">
+			<Button isIconOnly variant="light" onPress={() => handleOpen("rinfresco")} className="outline-none xs:max-w-[20px] ss:max-w-auto xs:min-w-unit-7 ss:min-w-unit-10">
 				<FontAwesomeIcon
 				    icon={faWineGlass}
-				    style={{ color: "#f9e285", height: props.iconsHeight ?? '2em' }}
+				    className={props.iconStyle}
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>
@@ -145,10 +145,10 @@ export const Discovery = (props) => {
 			</div>
 		</div>
 		<div className="flex flex-col justify-center text-center items-center">
-			<Button isIconOnly variant="light" onPress={() => handleOpen("nave")} className="outline-none">
+			<Button isIconOnly variant="light" onPress={() => handleOpen("nave")} className="outline-none xs:max-w-[20px] ss:max-w-auto xs:min-w-unit-7 ss:min-w-unit-10">
 				<FontAwesomeIcon
 				    icon={faShip}
-				    style={{ color: "#f9e285", height: props.iconsHeight ?? '2em' }}
+				    className={props.iconStyle}
 				/>
 			</Button>
 			<div className={`font-['Rochester'] text-[#f9e285] ${props.noText ? "hidden" : "hidden lg:block"}`}>

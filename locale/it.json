@@ -1,5 +1,6 @@
 {
   "translations": {
+    "in": "In",
     "headerTitle": "Il titolo della mia {{appName}}",
     "inviteStatement": "vi invitiamo a celebrare insieme il nostro matrimonio",
     "we": "Noi",
@@ -110,8 +111,8 @@
     "thirdSection97": "Ore 19:00 partenza (nel caso di mal tempo festeggeremo in porto) ",
     "thirdSection99": "La motonave New Ghibli ci offre uno sfondo spettacolare mentre navighiamo verso il tramonto, e non vediamo l'ora di condividere questo momento magico con tutti voi.",
     "thirdSection101": "Ore 19:00-21:00 Musica, apericena e tradizioni. ",
-    "thirdSection102": "Ore 21:00-23:00 Cena + torta + discorsi. ",
-    "thirdSection103": "Ore 23:00-01:00 Party con dink, musica, balli.  ",
+    "thirdSection102": "Ore 21:00-23:00 Cena, discorsi, taglio della torta.",
+    "thirdSection103": "Ore 23:00-01:00 Assieme al DJ Lori Zama: party con dink, musica, balli.  ",
     "thirdSection105": "E per finire, i più giovani e i più resistenti, con voglia di continuare a festeggiare ancora, non mancherà la tradizione rumena...",
     "thirdSection107": "Ore 01:00 del 16 giugno 2024 “Rapimento della Sposa”",
     "thirdSection111": "Abbigliamento Ricevimento - Cervia   ",

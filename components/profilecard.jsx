@@ -11,7 +11,7 @@ export const ProfileCard = React.forwardRef(({ className, image, name, descripti
   	<div className={rightToLeftOrder ? "hidden" : "visible flex gap-5 justify-between w-full"}>
 	    <div className="flex gap-5 items-center justify-center">
 	      <Avatar isBordered className="ring-1 ring-[#f9e285]" radius="full" size="md" src={`https://ringon.it/img/${image}`} />
-	      <h4 className="font-['Sacramento'] text-[3em] font-semibold leading-none text-[#f9e285]">
+	      <h4 className="font-['Sacramento'] xs:text-[2em] ss:text-[3em] font-semibold leading-none text-[#f9e285]">
 	        {name}
 	      </h4>
 	    </div>
@@ -21,7 +21,7 @@ export const ProfileCard = React.forwardRef(({ className, image, name, descripti
   	<div className={rightToLeftOrder ? "visible flex gap-5 justify-between w-full" : "hidden"}>
       <Heart newHeart={newHeart}/>
         <div className="flex gap-5 items-center justify-center">
-          <h4 className="font-['Sacramento'] text-[3em] font-semibold leading-none text-[#f9e285]">
+          <h4 className="font-['Sacramento'] xs:text-[2em] ss:text-[3em] font-semibold leading-none text-[#f9e285]">
             {name}
           </h4>
           <Avatar isBordered className="ring-1 ring-[#f9e285]" radius="full" size="md" src={`https://ringon.it/img/${image}`} />

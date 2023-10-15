@@ -39,7 +39,7 @@ const VerificationCodeInput = React.forwardRef(({handleCode, handleKey, char, in
             maxLength={maxLength}
             onKeyPress={onKeyPress}
             variant="bordered"
-            className="relative text-center w-full inline-flex flex-row items-center shadow-sm px-3 gap-3 border-medium border-default-200 hover:[&:not(:focus-within)]:border-default-400 focus-within:placeholder-transparent focus-within:border-foreground focus-visible:outline-none h-unit-10 min-h-unit-10 rounded-medium transition-background !duration-150 transition-colors motion-reduce:transition-none"
+            className="xs:text-[0.6em] ss:text-[1em] relative text-center w-full inline-flex flex-row items-center shadow-sm px-3 xs:gap-1 ss:gap-3 border-medium border-default-200 hover:[&:not(:focus-within)]:border-default-400 focus-within:placeholder-transparent focus-within:border-foreground focus-visible:outline-none h-unit-10 min-h-unit-10 rounded-medium transition-background !duration-150 transition-colors motion-reduce:transition-none"
         />
     )
 });

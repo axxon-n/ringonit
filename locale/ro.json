@@ -1,5 +1,6 @@
 {
     "translations": {
+    "in": "In",
     "headerTitle": "Titlul meu {{appName}}",
     "inviteStatement": "Vă invităm să sărbătorim împreună nunta noastră",
     "we": "Noi",
@@ -18,8 +19,8 @@
     "chiesaContent": "<p>După o ceremonie minunată la Primăria din Bologna în 'Sala Rossa', călătoria noastră spre căsătorie continuă! La ora <strong>11:00</strong>, vom merge pe jos la Biserica Ortodoxă San Nicola pentru ceremonia religioasă.</p>",
     "rinfrescoContent": "<p>După o ceremonie emoționantă la Biserica Ortodoxă San Nicola, vă invităm la o scurtă odihnă și surprize! <strong>În jurul orei 13:00</strong>, ne vom întâlni în Piazza Maggiore, la <strong>Bar Vittorio Emanuele</strong>, pentru recepția noastră.</p>",
     "naveContent": "<p><strong>Călătoria noastră spre fericire continuă cu o experiență de neuitat la bordul navei New Ghibli!</strong></p><p>Dar înainte de a porni în această aventură maritimă, am pregătit totul. Imediat după recepție în Bologna, ne vom îndrepta spre Cervia, unde <i>am rezervat un hotel pentru toți (sperăm că toți...)</i> la <strong>ora 16:30</strong>.</p>",
-    "brideDescription": "Se spune că un cuplu este, în mod definițional, format din trei persoane, dintre care una este momentan absentă. Nu este întotdeauna așa! La 25 de ani, eram deja în trei. Cu descoperirea minunatului nostru tătic, definiția noastră de cuplu devine una formată din cinci, dintre care unul este momentan absent.",
-    "groomDescription": "De la vârsta de 19 ani, dintr-un singur băiat, am devenit parte a unei vieți minunate! Și Cristina m-a învățat multe despre viață... Mai ales că într-un cuplu este foarte important să găsești echilibrul: o dată are dreptate ea, o dată am eu dreptate.",
+    "brideDescription": "Se spune că un cuplu este, prin definiție, format din trei persoane, dintre care una este momentan absentă. Nu este întotdeauna așa! La 25 de ani, eram deja în trei. Prin descoperirea minunatului nostru tătic, definiția noastră de cuplu devine una formată din cinci, dintre care unul este momentan absent.",
+    "groomDescription": "De la vârsta de 19 ani, dintr-un singur băiat, am devenit parte a unei vieți minunate! Și Cristina m-a învățat multe despre viață... Mai ales că într-un cuplu este foarte important să găsești echilibrul: o dată are dreptate ea, o dată am greșit eu.",
     "laNostraStoriaTitle": "Povestea Noastră",
     "23.03.2011": "23.03.2011",
     "sempreInsiemeTitle": "...Întotdeauna Împreună...",
@@ -99,7 +100,7 @@
     "thirdSection76": "În jurul orei 15:00, plecare de la “Parcare subterană”",
     "thirdSection78": "în Piazza VIII Agosto, 33, 40126 Bologna",
     "thirdSection80": "Cervia, unde avem la dispoziție un hotel de referință",
-    "thirdSection81": "pentru toți oaspeții noștri, cu un grădină mare și jocuri pentru copii, animale de companie acceptate și posibilitatea de a rezerva un loc de parcare privat.",
+    "thirdSection81": "pentru toți oaspeții noștri, cu o grădină mare și jocuri pentru copii, animale de companie acceptate și posibilitatea de a rezerva un loc de parcare privat.",
     "thirdSection84": "Check-in la ora 16:30, “Hotel Verde Luna”",
     "thirdSection86": "în Viale Milazzo, 78,",
     "thirdSection87": "48015 Cervia RA",
@@ -110,8 +111,8 @@
     "thirdSection97": "La ora 19:00, plecare (în caz de vreme rea, vom petrece în port)",
     "thirdSection99": "Nava New Ghibli ne oferă un cadru spectaculos pe măsură ce navigăm spre apusul soarelui, și abia așteptăm să împărtășim acest moment magic cu voi toți.",
     "thirdSection101": "Orele 19:00-21:00, Muzică, aperitiv și tradiții.",
-    "thirdSection102": "Orele 21:00-23:00, Cină + tort + discursuri.",
-    "thirdSection103": "Orele 23:00-01:00, Petrecere cu dansuri, muzică.",
+    "thirdSection102": "Orele 21:00-23:00, Cină, discursuri, tăierea taurului",
+    "thirdSection103": "Orele 23:00-01:00, Împreună cu DJ Lori Zama, petrecere cu dinks, muzică, dans.",
     "thirdSection105": "Și, în final, pentru cei mai tineri și mai rezistenți, care doresc să continue să se distreze, nu va lipsi tradiția românească...",
     "thirdSection107": "La ora 01:00, pe 16 iunie 2024, “Răpirea Miresei”",
     "thirdSection111": "Îmbrăcăminte pentru primire - Cervia",
@@ -123,6 +124,6 @@
     "thirdSection136": "Confirmare amabilă",
     "thirdSection142": "Ne așteaptă emoții, dansuri și multă bucurie pe măsură ce sărbătorim împreună.",
     "thirdSection143": "Vom adăuga mai multe informații la momentul potrivit.",
-    "thirdSection144": "Orarele pot suferi modificări, veți fi mereu informați despre orice schimbare și actualizări cu privire la evenimentele care sunt în prezent în curs de organizare."
+    "thirdSection144": "Programul se poate modifica, veți fi mereu informați despre orice schimbare și actualizări cu privire la evenimentele care sunt în prezent în curs de organizare."
 }
 }

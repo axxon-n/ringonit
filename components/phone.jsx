@@ -63,7 +63,7 @@ export const Phone = React.forwardRef((props, ref) => {
 	      	cursor: 'text',
 	      	display: props.isVisible ? 'flex' : 'none'
 	      }}
-	      className="h-14 py-2 gap-2 transition-background !duration-150 transition-colors motion-reduce:transition-none border-medium border-default-200 hover:[&:not(:focus-within)]:border-default-400 focus-within:border-foreground px-3 rounded-medium min-h-unit-10"
+	      className="xs:text-[0.7em] ss:text-[1em] h-14 py-2 gap-2 transition-background !duration-150 transition-colors motion-reduce:transition-none border-medium border-default-200 hover:[&:not(:focus-within)]:border-default-400 focus-within:border-foreground px-3 rounded-medium min-h-unit-10"
 	    />
 	);
 });

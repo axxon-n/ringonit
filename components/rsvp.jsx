@@ -29,7 +29,7 @@ export const Rsvp = (props) => {
 
 	return (
 <>
-	<Button className={`align-center outline-none justify-center ${props.textSize ? `text-[${props.textSize}]` : "text-[1.8rem]"}  font-['Rochester'] text-[#f9e285] ${props.additionalClassData ?? "border-[#f9e285] py-6"}`} 
+	<Button className={`align-center outline-none justify-center font-['Rochester'] text-[#f9e285] ${props.additionalClassData ?? "border-[#f9e285] py-6"}`} 
 		variant="bordered" onPress={() => handleRsvp()}>
         RSVP
 	</Button> 

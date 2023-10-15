@@ -57,7 +57,7 @@ const VerificationCodeInputs = React.forwardRef(({codeLength, value, onChange, i
     }));
 
     return (
-            <div className="flex gap-2">
+            <div className="flex xs:gap-1 ss:gap-2">
                 {
                     code.map((char, index) => ( 
                         <VerificationCodeInput 

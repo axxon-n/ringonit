@@ -12,8 +12,8 @@ export const Heart = ({ newHeart }) => {
     gsap.CSSRulePlugin
   );
 
-  const onPressHeart = () => {
-    const animation = TweenMax.fromTo(ref.current,.9,
+  const animation = (iref) => {
+   TweenMax.fromTo(iref.current,.9,
       {
         scale:2.8
       },
@@ -22,8 +22,11 @@ export const Heart = ({ newHeart }) => {
         ease: Power3.easeOut,
         yoyo: true
       }
-    );
-    animation.restart();
+    ).restart()
+  };
+
+  const onPressHeart = () => {
+    animation(ref);
     newHeart();
   };
 
