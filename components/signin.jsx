@@ -38,6 +38,7 @@ export const SignIn = (props) => {
 	const [valueIsLoading, setValueIsLoading] = React.useState(true);
 	const [valueParcheggio, setValueParcheggio] = React.useState(false);
 	const [valueLoader, setValueLoader] = React.useState(30);
+	const [valueRemainingParks, setValueRemainingParks] = React.useState(0);
 
 	const [isDataLoading, setDataLoading] = React.useState(false);
 	const [signinButtonLoading, setSigninButtonLoading] = React.useState(false);
@@ -70,6 +71,7 @@ export const SignIn = (props) => {
 		setValuePresence(valuePresenceArray);
 		setValueNotes(userInfo["user_data"]["notes"]);
 		setValueParcheggio(userInfo["user_data"]["needs_park"] || false);
+		setValueRemainingParks(12 - userInfo["total_parks"] || 0);
 		return true;
 	}
 
@@ -196,10 +198,11 @@ export const SignIn = (props) => {
 
 	const handleCompleteProfile = async () => {
 		setUserinfoButtonLoading(true);
+		setTextError('');
 		console.log("handleCompleteProfile", valueFullName?.target?.value);
 		console.log("handleCompleteProfile", valueInvitees);
 		console.log("handleCompleteProfile", valuePresence);
-		await post_user_info(
+		let resp = await post_user_info(
 			valueFullNameOnlyText || "",
 	    parseInt(valueInvitees) || 0,
 	    valuePresence.includes("comune"),
@@ -210,6 +213,12 @@ export const SignIn = (props) => {
 	    false,
 	    valueNotes
 		);
+		if (resp === null){
+			await set_user_data();
+			setTextError(t('noMoreParks'));
+			setUserinfoButtonLoading(false);
+			return;
+		};
 		setUserinfoButtonLoading(false);
 		props.onCloseForm();
 	}
@@ -317,15 +326,13 @@ export const SignIn = (props) => {
 				label={(
 					<>
 						<label 
-							class="xs:hidden ss:block text-small font-medium text-foreground pr-2 after:text-danger after:content-['*'] after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
+							className="xs:hidden ss:block text-small font-medium text-foreground pr-2 after:text-danger after:content-['*'] after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
 							id="react-aria8319736442-:r1f:" 
-							for="react-aria8319736442-:r1e:"
 						>{t('quanti')}
 						</label>
 						<label 
-							class="xs:block ss:hidden text-small font-medium text-foreground pr-0 after:text-danger after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
+							className="xs:block ss:hidden text-small font-medium text-foreground pr-0 after:text-danger after:ml-0.5 will-change-auto origin-top-left transition-all !duration-200 !ease-out motion-reduce:transition-none group-data-[has-helper=true]:pt-3" 
 							id="react-aria8319736442-:r1f:" 
-							for="react-aria8319736442-:r1e:"
 						>{t('in')}
 						</label>
 					</>
@@ -341,7 +348,7 @@ export const SignIn = (props) => {
 		}} className="justify-center">
 	    	<CheckboxGroup
 	    			isDisabled={userinfoButtonLoading}
-		        label={(<span class="relative text-small text-foreground-500">{t('ciSietePer')}</span>)}
+		        label={(<span className="relative text-small text-foreground-500">{t('ciSietePer')}</span>)}
 		        color="warning"
 		        value={valuePresence}
 		        onValueChange={setValuePresence}
@@ -387,9 +394,16 @@ export const SignIn = (props) => {
 		      onKeyPress={handleCompleteProfileKeyPress}
 		      className="max-w"
 		    />
-		    <Checkbox isDisabled={userinfoButtonLoading} color="warning" defaultSelected={valueParcheggio} isSelected={valueParcheggio} value={valueParcheggio} onValueChange={setValueParcheggio}>
+		    <Checkbox isDisabled={userinfoButtonLoading || valueRemainingParks <= 0 && !valueParcheggio} color="warning" defaultSelected={valueParcheggio} isSelected={valueParcheggio} value={valueParcheggio} onValueChange={(e) => {
+		    	setValueParcheggio(e);
+		    	if (e) {
+		    		setValueRemainingParks(valueRemainingParks - 1);
+		    	} else {
+		    		setValueRemainingParks(valueRemainingParks + 1);
+		    	};
+		    }}>
         	<div className="flex gap-x-1 items-center">
-        		<p className="xs:text-[0.7em] ss:text-[1em]">{t('parcheggioCheckbox')}</p>
+        		<p className="xs:text-[0.7em] ss:text-[1em]">{t('parcheggioCheckbox')}{valueRemainingParks}</p>
         	</div>
         </Checkbox>
 			</div>

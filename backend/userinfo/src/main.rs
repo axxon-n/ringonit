@@ -8,6 +8,8 @@ use std::collections::HashMap;
 use aws_sdk_dynamodb as dynamodb;
 use serde_dynamo::from_items;
 
+const MAX_PARK_NUM: usize = 12;
+
 #[derive(Deserialize, Serialize, Clone, Debug)]
 struct RequestBody {
     name: Option<String>,
@@ -36,13 +38,19 @@ struct User {
     groom_heartz: Option<i64>
 }
 
+#[derive(Deserialize, Serialize, Clone, Debug)]
+struct UserCounter {
+    user_id: String
+}
+
 #[derive(Deserialize, Serialize, Debug)]
 struct ResponseBody {
     #[serde(skip_serializing_if = "Option::is_none")]
     error: Option<String>,
     req_id: String,
     #[serde(skip_serializing_if = "Option::is_none")]
-    user_data: Option<User>
+    user_data: Option<User>,
+    total_parks: Option<usize>
 }
 
 async fn prepare_response(status_code: u16, resp: ResponseBody) -> Result<Response<Body>, anyhow::Error> {
@@ -85,9 +93,9 @@ async fn get_aws_config() -> aws_config::SdkConfig {
     aws_config::load_from_env().await
 }
 
-async fn main_logic_get(user_id: &str, client_dynamodb: dynamodb::Client) -> Result<User, anyhow::Error> {
+async fn main_logic_get(user_id: &str, client_dynamodb: dynamodb::Client) -> Result<(User, usize), anyhow::Error> {
 
-    let user_list: Vec<User> = pql::<User>(client_dynamodb, format!(r#"
+    let user_list: Vec<User> = pql::<User>(client_dynamodb.clone(), format!(r#"
         SELECT name,
             people_number,
             ship_confirm,
@@ -107,14 +115,20 @@ async fn main_logic_get(user_id: &str, client_dynamodb: dynamodb::Client) -> Res
         return Err(anyhow::anyhow!("ERROR WHILE EXTRACTING USER"))
     };
 
-    Ok(user_list[0].clone())
+    let user_list_count: Vec<UserCounter> = pql::<UserCounter>(client_dynamodb, format!(r#"
+        SELECT user_id
+        FROM ringonit_users
+        WHERE needs_park = true
+    "#)).await?;
+
+    Ok((user_list[0].clone(), user_list_count.len()))
 }
 
 async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamodb: dynamodb::Client) -> Result<(), anyhow::Error> {
 
     println!("REQUEST BODY -- {:?}", request_body);
 
-    let user_name = request_body.name.unwrap_or("".to_string());
+    let user_name = request_body.name.unwrap_or("".to_string()).replace("'", "`");
     let user_people_number = request_body.people_number.unwrap_or(0);
     let user_ship_confirm = request_body.ship_confirm.unwrap_or(false);
     let user_munic_confirm = request_body.munic_confirm.unwrap_or(false);
@@ -122,7 +136,17 @@ async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamo
     let user_church_confirm = request_body.church_confirm.unwrap_or(false);
     let user_needs_park = request_body.needs_park.unwrap_or(false);
     let user_hotel_self_hosted = request_body.hotel_self_hosted.unwrap_or(false);
-    let user_notes = request_body.notes.unwrap_or("".to_string());
+    let user_notes = request_body.notes.unwrap_or("".to_string()).replace("'", "`");
+
+    let user_list_count: Vec<UserCounter> = pql::<UserCounter>(client_dynamodb.clone(), format!(r#"
+        SELECT user_id
+        FROM ringonit_users
+        WHERE needs_park = true
+    "#)).await?;
+
+    if user_needs_park && user_list_count.len() + 1 > MAX_PARK_NUM {
+        return Err(anyhow::anyhow!("max park size reached"))
+    };
 
     if user_name.is_empty() {
         return Err(anyhow::anyhow!("name is required"))
@@ -130,6 +154,10 @@ async fn main_logic_post(request_body: RequestBody, user_id: &str, client_dynamo
 
     if user_people_number == 0 {
         return Err(anyhow::anyhow!("user_people_number is required"))
+    };
+
+    if user_people_number > 4 {
+        return Err(anyhow::anyhow!("user_people_number too big"))
     };
 
     pql::<User>(client_dynamodb, format!(r#"
@@ -165,11 +193,12 @@ async fn main_logic(request_body: RequestBody, claims: HashMap<String, serde_jso
     let awsconf = get_aws_config().await;
     let client_dynamodb = get_dynamodb_client(&awsconf).await;
 
-    let user_data = if method == "GET" {
-        Some(main_logic_get(user_id, client_dynamodb).await?)
+    let (user_data, needs_park_counter) = if method == "GET" {
+        let result = main_logic_get(user_id, client_dynamodb).await?;
+        (Some(result.0), Some(result.1))
     } else if method == "POST" {
         main_logic_post(request_body, user_id, client_dynamodb).await?;
-        None
+        (None, None)
     } else {
         return Err(anyhow::anyhow!("UNEXPECTED METHOD"))
     };
@@ -177,7 +206,8 @@ async fn main_logic(request_body: RequestBody, claims: HashMap<String, serde_jso
     Ok(ResponseBody {
         error: None,
         req_id: req_id,
-        user_data: user_data
+        user_data: user_data,
+        total_parks: needs_park_counter
     })
 }
 
@@ -236,7 +266,8 @@ async fn function_handler(event: Request) ->  Result<Response<Body>, Error> {
             ResponseBody {
                 req_id: req_id, 
                 error: Some(format!("{:?}", e)),
-                user_data: None
+                user_data: None,
+                total_parks: None
             }
         )
     };
