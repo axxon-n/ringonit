@@ -11,6 +11,7 @@ export default function Home() {
 		<div className="scroll-smooth" data-scroll-container>
 			<FirstSection />
 			<Navbar />
+			
 			<SecondSection />
 			<ThirdSection />
 			<FourthSection />
